@@ -1,0 +1,23 @@
+﻿@using Nancy.Helpers
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <div>
+	    <form action="/session/login" method="POST">
+		    <legend>Login Form</legend>
+		    Email: <input type="text" name="Email" />
+		    <br />
+		    Pasword: <input type="password" name="Password"/>
+		    <br />
+			<input type="hidden" name="ReturnUrl" value="@HttpUtility.HtmlEncode(ViewBag.ReturnUrl.Value)"/>
+		    <input type="submit" value="Login"/>
+	    </form>
+    </div>
+</body>
+</html>

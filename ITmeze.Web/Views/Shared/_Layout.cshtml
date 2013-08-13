@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+	<title>@ViewBag.Title - @ViewBag.Settings.Value.WebsiteName Blog</title>
+	<meta name="description" content="@ViewBag.Settings.Value.WebsiteUrl" />
+	<meta name="keywords" content="@ViewBag.Settings.Value.WebsiteUrl" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="canonical" href="@ViewBag.Settings.Value.WebsiteUrl" />
+	<link rel="stylesheet" type="text/css" href="/content/css/site.css" />
+	<link title="ITmeze RSS Feed" href="@ViewBag.Settings.Value.WebsiteUrl/rss/" rel="alternate" type="application/rss+xml"/>
+</head>
+<body>
+	<div id="main">
+		<div class="content">
+			<header>
+				<h1>
+					<a href="/">@ViewBag.Settings.Value.WebsiteHeader</a>
+				</h1>
+			</header>
+			@RenderBody()
+			
+			<footer>
+				<p style="float: right">Copyright 2013 © ITmeze</p>
+			</footer>
+		</div>
+		<div class="sidebar">
+			<h2>Recent posts</h2>
+			<ul>
+				@foreach (var title in ViewBag.Recent.Value.BlogPostsSummaries)
+				{
+					<li>
+						<a href="@title.Link">@title.Title</a>
+					</li>
+				}
+			</ul>
+			<h2>
+				Tag Cloud
+			</h2>
+			<ul>
+				@foreach (var tag in ViewBag.TagCould.Value.Tags)
+				{
+					<li style="display: inline">
+						<a href="/tagged/@tag.Key.Slug">@tag.Key.Name</a> x @tag.Value
+					</li>
+				}	
+			</ul>
+		</div>
+	</div>
+	
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"></script>
+	<script type="text/javascript">
+
+		var disqus_shortname = '@ViewBag.Settings.Value.DisqusShortName';
+
+		(function () {
+			var s = document.createElement('script'); s.async = true;
+			s.type = 'text/javascript';
+			s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+			(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+		}());
+	</script>
+	<script type="text/javascript">
+
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-3618867-4']);
+		_gaq.push(['_trackPageview']);
+
+		(function () {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+	
+	@RenderSection("PostScripts", false)
+
+</body>
+</html>

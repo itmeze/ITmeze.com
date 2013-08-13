@@ -1,0 +1,63 @@
+﻿@using System
+@using System.Linq
+@using ITmeze.Core.Documents
+@using ITmeze.Core.Security
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<ITmeze.Core.Views.Admin.BlogPostEditViewModel>
+@{
+	Layout = "Views/Shared/_AdminLayout.cshtml";
+}
+
+<article>
+	<form method="POST" action="/admin/posts/edit/@Model.BlogPost.Id">
+	<p>Title:</p>
+	<p>
+		<textarea name="Title" style="width: 300px">@Model.BlogPost.Title</textarea>
+	</p>
+	<p>
+		Text:
+	</p>
+	<p>
+		<textarea id="richText" class="richText" name="Content" rows="80" cols="40" >@Html.Raw(Model.BlogPost.Content)</textarea>
+	</p>
+	<p>
+		Tags: <input type="text" name="Tags" value="@string.Join(",", Model.BlogPost.Tags.Select(t => t.Name))"/>
+	</p>		
+	<p>
+		Pub Date: <input name="PubDate" value="@Model.BlogPost.PubDate"/>
+	</p>
+	<p>
+		Published: <input name="Published" value="true" type="checkbox" @((Model.BlogPost.Status == PublishStatus.Publish) ? "checked" : "") />
+	</p>
+	<p>
+		<input type="submit" value="Save"/>
+	</p>
+</form>
+</article>
+
+<div id="disqus_thread"></div>
+
+@section PostScripts {
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/content/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="/content/ckeditor/adapters/jquery.js"></script>
+	<script type="text/javascript">
+		//$('.richText').ckeditor();
+		CKEDITOR.replace('richText',
+			{
+    			startupFocus: true,
+    			toolbar:
+					[
+						['ajaxsave'],
+						['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink'],
+						['Cut', 'Copy', 'Paste', 'PasteText'],
+						['Undo', 'Redo', '-', 'RemoveFormat'],
+						['TextColor', 'BGColor'],
+						['Maximize', 'Image'],
+						['Source']
+					],
+    			filebrowserUploadUrl: '/admin/uploadFile',
+				filebrowserBrowseUrl: '/admin/browseFiles'
+			}
+		);
+	</script>
+}

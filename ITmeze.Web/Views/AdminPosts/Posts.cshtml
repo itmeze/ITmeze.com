@@ -1,0 +1,26 @@
+﻿@using System
+@using ITmeze.Core.Documents
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<ITmeze.Core.Views.Admin.AllBlogPostsViewModel>
+@{
+	Layout = "Views/Shared/_AdminLayout.cshtml";
+}
+
+<ul>
+	@foreach (var blogPost in Model.Posts)
+	{
+		<li>
+			@if(blogPost.Status == PublishStatus.Draft){
+				<span class="label label-warning">Draft</span>
+			}
+			@if(blogPost.PubDate > DateTime.UtcNow){
+				<span class="label label-info">Publish in future</span>
+			}
+			<a href="@blogPost.GetLink()">@blogPost.Title</a> <a href="/admin/posts/edit/@blogPost.Id">(edit)</a>
+		</li>
+	}
+</ul>
+@if (Model.Page > 1)
+{
+	<a href="/admin/posts/@(Model.Page - 1)"><-- Prev</a>
+}
+<a href="/admin/posts/@(Model.Page + 1)">Next --></a>

@@ -1,0 +1,39 @@
+﻿@using ITmeze.Core.Security
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<ITmeze.Core.Views.Home.RecentBlogPostsViewModel>
+@{
+	Layout = "Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var blogPost in Model.Posts)
+{
+	<article>
+		<header>
+			<h1>
+				<a href="@blogPost.GetLink()">@blogPost.Title</a>
+			</h1>
+		</header>
+		<p class="meta">
+			<img src="http://www.gravatar.com/avatar/@Hasher.GetMd5Hash(blogPost.AuthorEmail)?s=16" width="16" />
+			<a class="author">Itmeze</a>
+			<time pubdate>@blogPost.PubDate.ToString("dd MMMM yyyy")</time>
+		</p>
+		<div>
+			@Html.Raw(blogPost.Content)
+		</div>
+		<p>
+			Tags: @foreach (var tag in blogPost.Tags)
+		 {
+				<a href="/tagged/@tag.Slug">[@tag.Name]</a>  
+		 }
+			<a href="@blogPost.GetLink()/#disqus_thread"></a>
+		</p>
+	</article>
+}
+<p>
+	@if (Model.Page > 1)
+	{
+		<a href="/page/@(Model.Page - 1)"><-- Prev</a>
+	}
+	<a href="/page/@(Model.Page + 1)">Next --></a>
+
+</p>

@@ -1,0 +1,66 @@
+﻿@using System
+@using ITmeze.Core.Documents
+
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<ITmeze.Core.Commands.Posts.NewPostCommand>
+
+@{
+	ViewBag.Title = "Add new Post";
+	Layout = "Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Add new Post</h2>
+
+<article>
+	<form method="POST" action="/admin/posts/new">
+	<p>Title:</p>
+	<p>
+		<textarea name="Title" style="width: 300px">@Model.Title</textarea>
+	</p>
+	<p>
+		Text:
+	</p>
+	<p>
+		<textarea id="richText" class="richText" name="Content" rows="80" cols="40" >@Model.Content</textarea>
+	</p>
+	<p>
+		Tags: <input type="text" name="Tags" value="@Model.Tags" />
+	</p>		
+	<p>
+		Pub Date: <input name="PubDate" value="@(Model.PubDate != DateTime.MinValue ? Model.PubDate : DateTime.UtcNow)" />
+	</p>
+	<p>
+		Published: <input name="Published" value="true" type="checkbox" @(Model.Published ? "checked='checked'" : "") />
+	</p>
+	<p>
+		<input type="submit" value="Save"/>
+	</p>
+</form>
+</article>
+
+<div id="disqus_thread"></div>
+
+@section PostScripts {
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/content/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="/content/ckeditor/adapters/jquery.js"></script>
+	<script type="text/javascript">
+		//$('.richText').ckeditor();
+		CKEDITOR.replace('richText',
+			{
+    			startupFocus: true,
+    			toolbar:
+					[
+						['ajaxsave'],
+						['Bold', 'Italic', 'Underline', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink'],
+						['Cut', 'Copy', 'Paste', 'PasteText'],
+						['Undo', 'Redo', '-', 'RemoveFormat'],
+						['TextColor', 'BGColor'],
+						['Maximize', 'Image'],
+						['Source']
+					],
+    			filebrowserUploadUrl: '/admin/uploadFile',
+				filebrowserBrowseUrl: '/admin/browseFiles'
+			}
+		);
+	</script>
+}

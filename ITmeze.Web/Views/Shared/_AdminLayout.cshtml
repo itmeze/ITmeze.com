@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+	<title>Admin Panel</title>
+	<link rel="stylesheet" type="text/css" href="/content/css/site.css" />
+	<link rel="stylesheet" type="text/css" href="/content/css/admin.css" />
+</head>
+<body>
+	<div id="main">
+		@foreach (dynamic msg in ViewBag.Messages.Value)
+		{
+			<div class="alert alert-@msg.MsgType">
+				@msg.Message
+			</div>
+		}
+		<div class="content">
+			<ul style="list-style-type: none; ">
+				<li style="display: inline; margin: 10px;"><a href="/admin/posts">Recent posts</a></li>
+				<li style="display: inline; margin: 10px;"><a href="/admin/posts/new">New posts</a></li>
+				<li style="display: inline; margin: 10px;"><a href="/admin/changepassword">Change password</a></li>
+				<li style="display: inline; margin: 10px">Hi @ViewBag.CurrentUser.Value.UserName <a href="/session/logout">Logout</a></li>
+			</ul>
+			<div class="clearfix"></div>
+			<p></p>
+			@RenderBody()
+		</div>
+	</div>
+	@RenderSection("PostScripts", false)
+
+</body>
+</html>
