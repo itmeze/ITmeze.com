@@ -14,7 +14,7 @@ namespace ITmeze.Core.Documents
 		public string DisplayName { get; set; }
 
 		//for compatibility with export
-		public string Username { get; set; }
+		public string UserName { get; set; }
 
 		public string[] Roles { get; set; }
 

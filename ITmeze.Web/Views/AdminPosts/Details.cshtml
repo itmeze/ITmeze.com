@@ -26,7 +26,7 @@
 		Pub Date: <input name="PubDate" value="@Model.BlogPost.PubDate"/>
 	</p>
 	<p>
-		Published: <input name="Published" value="true" type="checkbox" @((Model.BlogPost.Status == PublishStatus.Publish) ? "checked" : "") />
+		Published: <input name="Published" value="true" type="checkbox" @((Model.BlogPost.Status == PublishStatus.Published) ? "checked" : "") />
 	</p>
 	<p>
 		<input type="submit" value="Save"/>

@@ -33,7 +33,7 @@ namespace ITmeze.Import
 
 					                              return new Author()
 						                                     {
-							                                     Username = login != null ? login.Value : null,
+							                                     UserName = login != null ? login.Value : null,
 							                                     Email = email != null ? email.Value : null,
 							                                     DisplayName = displayName != null ? displayName.Value : null,
 																 HashedPassword = Hasher.GetMd5Hash("test password") //to be changed
@@ -47,8 +47,8 @@ namespace ITmeze.Import
 
 
 									var creatorusername = e.Element(dc + "creator").Value;
-									var authorDisplayName = authors.FirstOrDefault(a => a.Username == creatorusername).DisplayName;
-									var authorEmail = authors.FirstOrDefault(a => a.Username == creatorusername).Email;
+									var authorDisplayName = authors.FirstOrDefault(a => a.UserName == creatorusername).DisplayName;
+									var authorEmail = authors.FirstOrDefault(a => a.UserName == creatorusername).Email;
 									var status = e.Element(wp + "status").Value == "publish" ? PublishStatus.Published : PublishStatus.Draft;
 									var date = DateTime.MinValue;
 									var pubDate = DateTime.MaxValue;
