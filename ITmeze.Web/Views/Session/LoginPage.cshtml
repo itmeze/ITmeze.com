@@ -11,6 +11,15 @@
     <div>
 	    <form action="/session/login" method="POST">
 		    <legend>Login Form</legend>
+		    @if (Model != null && Model.Length > 0)
+		    {
+				<ul>
+			    @foreach (var err in Model)
+			    {
+					<li>@err</li>
+			    }
+				</ul>
+		    }
 		    Email: <input type="text" name="Email" />
 		    <br />
 		    Pasword: <input type="password" name="Password"/>
