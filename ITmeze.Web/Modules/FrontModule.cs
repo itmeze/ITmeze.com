@@ -30,6 +30,8 @@ namespace ITmeze.Web.Modules
 			ViewBag.Recent =
 				_viewFactory.Get<RecentBlogPostSummaryBindingModel, RecentBlogPostSummaryViewModel>(
 					new RecentBlogPostSummaryBindingModel());
+
+			ViewBag.Sample = "test";
 		}
 	}
 
