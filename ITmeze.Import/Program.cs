@@ -22,7 +22,7 @@ namespace ITmeze.Import
 			XNamespace dc = @"http://purl.org/dc/elements/1.1/";
 			XNamespace content = @"http://purl.org/rss/1.0/modules/content/";
 
-			var document = XElement.Load(new FileStream(@"F:\Downloads\itmeze.wordpress.2013-03-10.xml", FileMode.Open)).Element("channel");
+			var document = XElement.Load(new FileStream(@"F:\Downloads\itmeze.wordpress.2012-08-05.xml", FileMode.Open)).Element("channel");
 
 			var authors = document.Elements(wp + "author").Where(e => e.Element(wp + "author_login") != null)
 			                      .Select(e =>
@@ -77,7 +77,7 @@ namespace ITmeze.Import
 
 			posts.AsParallel().ForAll(blogPost => blogPost.Content = FixContent(blogPost.Content));
 
-			var connectionString = "mongodb://localhost";
+			var connectionString = "mongodb://itmeze:Irlandia2003@ds035448.mongolab.com:35448/itmeze_blog";
 			var client = new MongoClient(connectionString);
 
 			var server = client.GetServer();
@@ -155,9 +155,9 @@ namespace ITmeze.Import
 				var src = node.Attributes["src"];
 				var uri = new Uri(src.Value);
 
-				client.DownloadFile(uri, @"F:\Code\ITmeze.com\ITmeze.Web\uploads\images\" + Path.GetFileName(uri.LocalPath));
+				//client.DownloadFile(uri, @"F:\Code\ITmeze.com\ITmeze.Web\uploads\images\" + Path.GetFileName(uri.LocalPath));
 
-				string newValue = @"/uploads/images/" + Path.GetFileName(uri.LocalPath);
+				string newValue = @"https://s3.amazonaws.com/itmeze-com/images/" + Path.GetFileName(uri.LocalPath);
 
 				if (node.ParentNode != null && node.ParentNode.Name == "a" && node.ParentNode.Attributes.Contains("href") &&
 				    node.ParentNode.Attributes["href"].Value == src.Value)

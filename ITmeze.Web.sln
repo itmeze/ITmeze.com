@@ -1,5 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITmeze.Web", "ITmeze.Web\ITmeze.Web.csproj", "{7B5BF18F-18B2-4A0F-BA84-5A42DAAC010A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITmeze.Core", "ITmeze.Core\ITmeze.Core.csproj", "{D6DB6C53-3F52-4850-9FA1-80127CE45BB4}"
@@ -55,7 +57,6 @@ Global
 		{3238F5D5-A1E0-40A4-A540-781AEACB6BEE}.MonoRelease|Any CPU.ActiveCfg = Release|Any CPU
 		{3238F5D5-A1E0-40A4-A540-781AEACB6BEE}.MonoRelease|Any CPU.Build.0 = Release|Any CPU
 		{3238F5D5-A1E0-40A4-A540-781AEACB6BEE}.Publish|Any CPU.ActiveCfg = Publish|Any CPU
-		{3238F5D5-A1E0-40A4-A540-781AEACB6BEE}.Publish|Any CPU.Build.0 = Publish|Any CPU
 		{3238F5D5-A1E0-40A4-A540-781AEACB6BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3238F5D5-A1E0-40A4-A540-781AEACB6BEE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{35F65826-C207-469D-AE08-AAC0E1C7E1A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

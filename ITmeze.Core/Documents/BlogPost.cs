@@ -39,7 +39,7 @@ namespace ITmeze.Core.Documents
 
 		public string GetLink()
 		{
-			return "/{0}/{1}/".FormatWith(PubDate.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture), TitleSlug);
+			return "/{0}/{1}".FormatWith(PubDate.ToString("yyyy/MM/dd", CultureInfo.InvariantCulture), TitleSlug.TrimEnd('/'));
 		}
 	}
 
