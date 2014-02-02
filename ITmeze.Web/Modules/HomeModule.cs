@@ -23,8 +23,8 @@ namespace ITmeze.Web.Modules
 
 			Get["/{year}/{month}/{day}/{titleslug}"] = parameters =>
 			                                           {
-														   if(Request.Url.ToString().EndsWith("/"))
-															   return new RedirectResponse(Request.Url.ToString().TrimEnd('/'), RedirectResponse.RedirectType.Permanent);
+														   if(Request.Url.Path.EndsWith("/"))
+															   return new RedirectResponse(Request.Url.Path.TrimEnd('/'), RedirectResponse.RedirectType.Permanent);
 
 				                                           return ReturnArticle(new BlogPostDetailsBindingModel {
 					                                                         Permalink =
