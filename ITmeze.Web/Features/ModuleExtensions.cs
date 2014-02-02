@@ -14,6 +14,14 @@ namespace ITmeze.Web.Features
 				                 };
 		}
 
+		public static void DisableCache(this NancyModule module)
+		{
+			if (module.Context.Items.ContainsKey(CACHE_ITEM_KEY))
+			{
+				module.Context.Items.Remove(CACHE_ITEM_KEY);
+			}
+		}
+
 		public static bool IsCacheEnabled(this NancyContext context)
 		{
 			return context.Items.ContainsKey(CACHE_ITEM_KEY);

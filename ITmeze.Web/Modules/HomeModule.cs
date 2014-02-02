@@ -1,6 +1,9 @@
 ﻿using System;
+using ITmeze.Core.Documents;
 using ITmeze.Core.Views;
 using ITmeze.Core.Views.Home;
+using ITmeze.Web.Features;
+using Nancy.Responses;
 using Nancy.Responses.Negotiation;
 
 namespace ITmeze.Web.Modules
@@ -19,7 +22,16 @@ namespace ITmeze.Web.Modules
 				ReturnArticlesTaggedBy(new TaggedBlogPostsBindingModel() { Tag = parameters.tag });
 
 			Get["/{year}/{month}/{day}/{titleslug}"] = parameters =>
-				ReturnArticle(new BlogPostDetailsBindingModel { Permalink = parameters.titleslug });
+			                                           {
+														   if(Request.Url.ToString().EndsWith("/"))
+															   return new RedirectResponse(Request.Url.ToString().TrimEnd('/'), RedirectResponse.RedirectType.Permanent);
+
+				                                           return ReturnArticle(new BlogPostDetailsBindingModel {
+					                                                         Permalink =
+						                                                         parameters
+						                                                         .titleslug
+				                                                         });
+			                                           };
 
 			Get["/{year}/{month}/{day?}"] = parameters =>
 				                                {
@@ -50,11 +62,15 @@ namespace ITmeze.Web.Modules
 
 		public Negotiator ReturnArticle(BlogPostDetailsBindingModel input)
 		{
-			
 			var model =
 				_viewFactory.Get<BlogPostDetailsBindingModel, BlogPostDetailsViewModel>(input);
 
 			ViewBag.Title = model.BlogPost.Title;
+
+			bool isPublished = BlogPost.IsPublished.Compile().Invoke(model.BlogPost);
+
+			if(!isPublished)
+				this.DisableCache();
 
 			return View["details", model];
 		}
