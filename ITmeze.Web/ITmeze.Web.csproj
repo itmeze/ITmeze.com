@@ -467,6 +467,7 @@
     <Content Include="Views\AdminPosts\New.cshtml" />
     <Content Include="Views\Admin\ChangePassword.cshtml" />
     <None Include="Properties\PublishProfiles\itmeze - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\itmeze - web deploy to aws.pubxml" />
     <None Include="Properties\PublishProfiles\itmeze - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Web.Debug.config">

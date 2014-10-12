@@ -155,3 +155,4 @@ packages/
 Itmeze.Web/uploads/*
 
 Itmeze.Web/Web.Publish.config
+ITmeze.Web/Properties/PublishProfiles/*
